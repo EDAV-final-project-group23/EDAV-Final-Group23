@@ -1,64 +1,28 @@
-This is a template for the EDAV final project. It is based on the template created with *File, New Project..., New Directory, Book Project using bookdown* in RStudio. 
+# Minority working conditions in New York City from 1850 to 1940
 
+This project is the final project of Columbia University Course GR5702,
+Exploratory Data Analysis and Visualization. The project is about minority 
+working conditions in New York City from 1850 to 1940.
 
-## ABSOLUTE ESSENTIALS
+The book link is: [https://edav-final-project-group23.github.io/EDAV-Final-Group23/](https://edav-final-project-group23.github.io/EDAV-Final-Group23/)
 
-*If you have any difficulties or have feedback of any kind, please file an issue.*
+## Data Source
 
-### Copy this template
+Decennial censuses of NYC residents from 1850 to 1940. The source, IPUMS USA, “collects, preserves and harmonizes US census microdata and provides easy access to this data with enhanced documentation.” [dataset introduction page](https://usa.ipums.org/usa/intro.shtml), [sample codebook](https://usa.ipums.org/usa-action/variables/OCC1950#description_section)
 
-- [ ] 1. Click the green "Use this template" button above.  DO NOT FORK THE REPO. Choose a descriptive name for your repo, such as "federalbudget" or "AIDSdeaths".  (If you change your mind before you do any work, delete your new repo and start over.)
+## Content
 
-- [ ] 2. In the Description field, write: "Bookdown source files for EDAV final project".
+Theme: Evolving labor landscape of disadvantaged groups in NYC (1850 - 1940)
 
-### Set up GitHub Pages	
-- [ ] 1. On the home page of your repo, click Settings. Scroll down to the GitHub pages section and change **Source** from **None** to **main**, change **/ (root)** to **/docs** folder, and click Save. Above the **Source** line, a bar will appear with your book's URL. The bar will initially be blue and indicate that your book is *ready* to be published and will change to green once it is published. Copy the URL. (Note that sometimes there is a delay until your book actually appears at that URL. If it doesn't appear after a few minutes, make a change and commit it to trigger a GitHub Pages build.)	
+Descriptive analysis will provide initial insights and raise questions for further visualizations.
+What: Visualize and describe the trends in the working life of disadvantaged groups, i.e. females, minority ethnicity, in New York City. Specific aspects include job title, industry, income, employment status, etc. 
 
-- [ ] 2. Click the gear button near "About" on the home page of the repo and paste your book URL into the **Website** field that appears on the right.
+Why: 
+Education. The change in education received by women/minority ethnicity in the US from 1850 to 1940 and its influence on work conditions of women/minority ethnicity.  
+Household structure. More specifically, we may explore how parental income, structure of nuclear family, marital status, among other factors may shed light on the changing workforce representation of the disadvantaged population.
+Geospatial. The difference between work conditions of women/minority ethnicity among different neighborhoods in NYC, verifying or disproving the claims of urban slums and spatial segregation. 
 
-### Clone the repo
+Originality: 
 
-- [ ] 1. Clone your new repo with *File, New Project..., Version Control, Git* in RStudio.
-
-### Edit some key files
-
-- [ ] 1. In `index.Rmd`, change YOUR TITLE HERE to your title.
-
-- [ ] 2. In `index.Rmd`, change YOUR NAMES HERE to your names.
-
-- [ ] 3. In `_bookdown.yml`, change YOUR GITHUB USERNAME to your GitHub username in the two places it appears.
-
-- [ ] 4. In `_bookdown.yml`, change YOUR GITHUB REPO to your GitHub repo name in the two places it appears.
-
-(Note that 3. and 4. provide links to the `.Rmd` files of your project for editing and viewing. If you move your `.Rmd` files you will need to update these file paths. Once your book is rendered, test that the edit (pen) and view (eye) buttons work.)
-
-- [ ] 5. In `_output.yml`, change YOUR SHORT TITLE to a shortened version of your title. (Leave the "after:" line indicating that the book was published with bookdown as is.)
-
-### Render the book
-
-- [ ] 1. Install **bookdown** with `install.packages("bookdown")`. If you already have it, update to the most recent version.
-
-- [ ] 2. Render locally with `bookdown::render_book("index.Rmd")` or clicking the *Build book* button which should appear in the Build tab (in the same pane as Environment, History, Connections, ...).
-
-- [ ] 3. Use `browseURL("docs/index.html")` to view your book locally (or just open `index.html` in a browser).
-
-- [ ] 4. If it looks good, commit and push all changed files to GitHub. 
-
-(You will need to repeat steps 2 and 4 every time you wish to update the book online.)
-
-### Edit README	
-
-Once you've completed these steps, delete the content of this **README** and add a short description of your project with a link to the book URL. It would be appreciated if you add the following to the end:	
-
-*This repo was initially generated from a bookdown template available here: https://github.com/jtr13/EDAVtemplate.*	
-
-### Demo Video	
-
-A demo video showing how to create a **bookdown book** following these similar instructions: http://bit.ly/fiveminutebookdown Note that this video uses a different template.
-
-### Additional features	
-
-Please consult the official guide to **bookdown**: https://bookdown.org/yihui/bookdown
-
-
+While education is a go-to topic for labor related research, influences of household structure and geospatial environment are not studied extensively. Even fewer people make use of the newly-available census microdata and R visualization toolkit to conduct such explorations. These three dimensions we explore here are meant to serve as a jumping board for more creative analysis by anyone interested in further research.
 
