@@ -1,9 +1,8 @@
 --- 
-title: "YOUR TITLE HERE"
-author: "YOUR NAMES HERE"
+title: "Minority working conditions in New York City from 1850 to 1940"
+author: "Luwei Zhang, Guangyu Wu, Jingxiang Zhang"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 ---
 
 # Introduction
-
