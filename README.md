@@ -26,3 +26,6 @@ Originality:
 
 While education is a go-to topic for labor related research, influences of household structure and geospatial environment are not studied extensively. Even fewer people make use of the newly-available census microdata and R visualization toolkit to conduct such explorations. These three dimensions we explore here are meant to serve as a jumping board for more creative analysis by anyone interested in further research.
 
+
+*This repo was initially generated from a bookdown template available here: https://github.com/jtr13/EDAVtemplate.*
+
