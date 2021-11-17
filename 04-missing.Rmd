@@ -14,7 +14,7 @@ set.seed(5702)
 ```
 
 ```{r}
-df <- read.csv(file = 'data/ipums_nyc_1_percent.csv')
+df <- read.csv(file = 'data/ipums_nyc_1_percent_decoded.csv')
 ```
 
 ```{r}
