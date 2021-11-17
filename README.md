@@ -23,7 +23,6 @@ Household structure. More specifically, we may explore how parental income, stru
 Geospatial. The difference between work conditions of women/minority ethnicity among different neighborhoods in NYC, verifying or disproving the claims of urban slums and spatial segregation. 
 
 Originality: 
-
 While education is a go-to topic for labor related research, influences of household structure and geospatial environment are not studied extensively. Even fewer people make use of the newly-available census microdata and R visualization toolkit to conduct such explorations. These three dimensions we explore here are meant to serve as a jumping board for more creative analysis by anyone interested in further research.
 
 
