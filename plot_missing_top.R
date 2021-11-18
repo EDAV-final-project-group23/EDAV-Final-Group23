@@ -1,7 +1,5 @@
-library(tidyverse)
-library(patchwork)
-
-plot_missing<-function(df, percent = FALSE){
+plot_missing_top<-function(df, percent = FALSE, top_patterns=NULL){
+  # display the most common n patterns by setting top_patterns = n
   missing_patterns <- data.frame(is.na(df)) %>%
     group_by_all() %>%
     count(name = "counts", sort = TRUE) %>%
@@ -16,9 +14,13 @@ plot_missing<-function(df, percent = FALSE){
                                      levels = rev(factor(missing_patterns$pattern)))
   # print(missing_patterns)
   
+  if (is.null(top_patterns)){
+    top_patterns<-nrow(missing_patterns)
+  }
+  
   first_var <- colnames(missing_patterns)[1]
   last_var <- colnames(missing_patterns)[ncol(df)]
-  helper<- missing_patterns%>%gather(var_name, is_missing, first_var:last_var)
+  helper<- missing_patterns[1:top_patterns,]%>%gather(var_name, is_missing, first_var:last_var)
   helper$is_missing<-as.numeric(helper$is_missing)
   var_miss_counts<-helper%>%group_by(var_name)%>% 
     summarise(mis_counts = sum(counts*is_missing)) %>% 
@@ -37,11 +39,9 @@ plot_missing<-function(df, percent = FALSE){
   }
   if (is.null(complete)){
     helper$alphas <- 0.5
-  }
-  else{
+  }else{
     helper$alphas <- if_else( helper$pattern==complete, 1.0, 0.5)
   }
-  
   
   p1<-ggplot(helper, aes(x = var_name, y = pattern, fill = is_missing)) +
     geom_tile(color = "white", alpha = helper$alphas) +
@@ -60,7 +60,7 @@ plot_missing<-function(df, percent = FALSE){
       ylab("% rows missing:")+
       ylim(0, 100)
     
-    p3<-ggplot(missing_patterns, aes(x = reorder(pattern, counts), y = counts)) +
+    p3<-ggplot(missing_patterns[1:top_patterns,], aes(x = reorder(pattern, counts), y = counts)) +
       geom_bar(stat="identity", fill = '#6495ED', alpha = 0.7)+  
       xlab("") + 
       ylab("% rows")+
@@ -72,7 +72,7 @@ plot_missing<-function(df, percent = FALSE){
       geom_bar(stat="identity", fill = '#6495ED', alpha = 0.7)+  xlab("") + 
       ylab("num rows missing:")
     
-    p3<-ggplot(missing_patterns, aes(x = reorder(pattern, counts), y = counts)) +
+    p3<-ggplot(missing_patterns[1:top_patterns,], aes(x = reorder(pattern, counts), y = counts)) +
       geom_bar(stat="identity", fill = '#6495ED', alpha = 0.7)+  
       xlab("") + 
       ylab("row count")+
@@ -87,4 +87,3 @@ plot_missing<-function(df, percent = FALSE){
   p5/p4 +
     plot_layout( heights = c(2,7), widths = c(1))
 }
-
