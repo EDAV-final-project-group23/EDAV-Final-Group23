@@ -25,8 +25,7 @@ https://doi.org/10.18128/D010.V11.0]
 
 ## IPUMSR
 
-```{r, include=FALSE}
-# install.packages("ipumsr")
+```{r}
 library(ipumsr) 
 library(tidyverse) 
 library(sf)

@@ -15,8 +15,13 @@ source("plot_missing.R")
 ```
 
 ```{r fig.height = 9, fig.width = 9}
+
+# Check data codebook in help window
+ddi <- read_ipums_ddi("./data/usa_00038.xml")
+ipums_view(ddi)
+
 # Load data
-df <- read.csv(file = './data/ipums.csv',na.strings=c("","NA"))
+df <- read.csv(file = './data/ipums.csv',na.strings=c("NA"))
 
 # Abbreviate variable names 
 colnames(df) <- c("YEAR", "CITY", "FAMS", "REL", "SEX", "AGE", "MAR", 
