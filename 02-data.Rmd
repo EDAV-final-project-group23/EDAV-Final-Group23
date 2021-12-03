@@ -1,2 +1,43 @@
 # Data sources
 
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, echo = TRUE)
+knitr::write_bib("knitr", file = "packages.bib")
+## Tidyverse
+install.packages("dplyr")
+install.packages("ggplot2")
+install.packages("stringr")
+install.packages("purrr")
+## HTML tables
+install.packages("DT")
+## GIS
+install.packages("sf")
+```
+
+## IPUMS introduction
+
+Data ^[Steven Ruggles, Sarah Flood, Sophia Foster, Ronald Goeken, Jose Pacas, Megan Schouweiler and Matthew Sobek. IPUMS USA: Version 11.0 [dataset]. Minneapolis, MN: IPUMS, 2021. 
+https://doi.org/10.18128/D010.V11.0] 
+
+## Scope
+
+## Creating Data Extract
+
+## IPUMSR
+
+```{r, include=FALSE}
+# install.packages("ipumsr")
+library(ipumsr) 
+library(tidyverse) 
+library(sf)
+```
+
+```{r}
+ddi <- read_ipums_ddi("./data/usa_00038.xml")
+data <- read_ipums_micro(ddi)
+data <- data %>% select(-c(SERIAL, PERNUM, RELATED, RACED, BPLD, MBPLD, FBPLD, YRSUSA2, MTONGUE, MTONGUED, PRESGL))
+print(names(data))
+```
+
+## Codebook 
+

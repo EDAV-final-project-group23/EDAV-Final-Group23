@@ -16,16 +16,16 @@ source("plot_missing.R")
 
 ```{r fig.height = 9, fig.width = 9}
 # Load data
-df <- read.csv(file = 'data/ipums_nyc_1_percent_decoded.csv',na.strings=c(""))
+df <- read.csv(file = './data/ipums.csv',na.strings=c("","NA"))
 
 # Abbreviate variable names 
-colnames(df) <-c("YR", "SER", "PER", "SEX", "RAC", "AGE", "REL", 
-"MAR", "FS", "BP", "MBP", "FBP", "NAT", "CIT", 
-"YRI", "LIT", "EDS", "OCC", "OCS", "PRS", 
-"IND", "EMP", "INC", "OCA", "ICA")
+colnames(df) <- c("YEAR", "CITY", "FAMS", "REL", "SEX", "AGE", "MAR", 
+"RAC", "BPL", "MBP", "FBP", "NAT", "CIT", "YRI", 
+"SCH", "LIT", "LAB", "OCC", "IND", "INC", 
+"OCS", "EDS", "OCA", "ICA", "YUS")
 
 # Remove variable irrelevant to working condition analysis
-df <- df %>% select (-c("YR", "SER", "PER", "FS", "NAT"))
+df <- df %>% select (-c("YEAR", "CITY", "FAMS"))
 
 # Plot top 30 missing patterns 
 plot_missing_top(df, percent = TRUE, top_patterns = 30)

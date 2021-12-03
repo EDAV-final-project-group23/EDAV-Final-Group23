@@ -1,8 +1,16 @@
 --- 
-title: "Minority working conditions in New York City from 1850 to 1940"
+title: "Women's and Minorities' Working Opportunities in New York City from 1850 to 1940"
 author: "Luwei Zhang, Guangyu Wu, Jingxiang Zhang"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 ---
 
 # Introduction
+
+At the turn of the 20th century, New York City experienced one of the fastest periods of urban growth, as it overtook London to become the most populous urbanized area in the world and the first megacity in the human history^["New York Urbanized Area: Population & Density from 1800 (Provisional)". Demographia. Retrieved July 8, 2009.]. Powering this tremendous growth is the working people of NYC, who came from different backgrounds and contributed to the booming industries of the city. 
+
+However, working opportunities are not always abundant. The fierce competition between disadvantaged groups such as the Irish immigrants and the Black population escalates to one of the worst riots in American history. 
+
+In the meantime, the working conditions of women 
+
+under-regulated industry "the Triangle Shirtwaist Factory fire, the city's worst industrial disaster, took the lives of 146 garment workers and spurred the growth of the International Ladies' Garment Workers' Union and major improvements in factory safety standards."^["The 1911 Triangle Factory Fire". Kheel Center, Cornell University. Retrieved February 9, 2017.] 

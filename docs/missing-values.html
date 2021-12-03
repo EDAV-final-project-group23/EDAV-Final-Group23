@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 4 Missing values | Minority working conditions in New York City from 1850 to 1940</title>
-  <meta name="description" content="Chapter 4 Missing values | Minority working conditions in New York City from 1850 to 1940" />
+  <title>Chapter 4 Missing values | Women’s and Minorities’ Working Opportunities in New York City from 1850 to 1940</title>
+  <meta name="description" content="Chapter 4 Missing values | Women’s and Minorities’ Working Opportunities in New York City from 1850 to 1940" />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 4 Missing values | Minority working conditions in New York City from 1850 to 1940" />
+  <meta property="og:title" content="Chapter 4 Missing values | Women’s and Minorities’ Working Opportunities in New York City from 1850 to 1940" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 4 Missing values | Minority working conditions in New York City from 1850 to 1940" />
+  <meta name="twitter:title" content="Chapter 4 Missing values | Women’s and Minorities’ Working Opportunities in New York City from 1850 to 1940" />
   
   
   
@@ -24,7 +24,7 @@
 <meta name="author" content="Luwei Zhang, Guangyu Wu, Jingxiang Zhang" />
 
 
-<meta name="date" content="2021-11-18" />
+<meta name="date" content="2021-12-03" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -138,8 +138,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <li class="divider"></li>
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
-<li class="chapter" data-level="2" data-path="data-sources.html"><a href="data-sources.html"><i class="fa fa-check"></i><b>2</b> Data sources</a></li>
-<li class="chapter" data-level="3" data-path="data-transformation.html"><a href="data-transformation.html"><i class="fa fa-check"></i><b>3</b> Data transformation</a></li>
+<li class="chapter" data-level="2" data-path="data-sources.html"><a href="data-sources.html"><i class="fa fa-check"></i><b>2</b> Data sources</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="data-sources.html"><a href="data-sources.html#ipums-introduction"><i class="fa fa-check"></i><b>2.1</b> IPUMS introduction</a></li>
+<li class="chapter" data-level="2.2" data-path="data-sources.html"><a href="data-sources.html#scope"><i class="fa fa-check"></i><b>2.2</b> Scope</a></li>
+<li class="chapter" data-level="2.3" data-path="data-sources.html"><a href="data-sources.html#creating-data-extract"><i class="fa fa-check"></i><b>2.3</b> Creating Data Extract</a></li>
+<li class="chapter" data-level="2.4" data-path="data-sources.html"><a href="data-sources.html#ipumsr"><i class="fa fa-check"></i><b>2.4</b> IPUMSR</a></li>
+<li class="chapter" data-level="2.5" data-path="data-sources.html"><a href="data-sources.html#codebook"><i class="fa fa-check"></i><b>2.5</b> Codebook</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="data-transformation.html"><a href="data-transformation.html"><i class="fa fa-check"></i><b>3</b> Data transformation</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="data-transformation.html"><a href="data-transformation.html#decoding-handling-na-missing-and-other-category-codes-enforce-data-type-reduce-cardinality"><i class="fa fa-check"></i><b>3.1</b> Decoding, Handling n/a, missing, and other category codes, Enforce data type, Reduce cardinality</a></li>
+</ul></li>
 <li class="chapter" data-level="4" data-path="missing-values.html"><a href="missing-values.html"><i class="fa fa-check"></i><b>4</b> Missing values</a></li>
 <li class="chapter" data-level="5" data-path="results.html"><a href="results.html"><i class="fa fa-check"></i><b>5</b> Results</a></li>
 <li class="chapter" data-level="6" data-path="interactive-component.html"><a href="interactive-component.html"><i class="fa fa-check"></i><b>6</b> Interactive component</a></li>
@@ -155,7 +165,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Minority working conditions in New York City from 1850 to 1940</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Women’s and Minorities’ Working Opportunities in New York City from 1850 to 1940</a>
           </h1>
         </div>
 
@@ -165,34 +175,34 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="missing-values" class="section level1" number="4">
 <h1><span class="header-section-number">Chapter 4</span> Missing values</h1>
-<p>As the one of world’s largest collections of open-access census microdata, IPUMS has been meticulously cleaned and analyzed for completeness and missing patterns. According to its documentation, “missing, illegible and inconsistent values” in variables are edited or allocated, and tagged with data quality flags to indicate the kind of edits applied<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>. When understanding the missing values in the outcome data, which we will use for this project, we need bear in mind that the above-mentioned sources of missing values are cleaned and interpolated by the IPUMS team to the best they can.</p>
+<p>As the one of world’s largest collections of open-access census microdata, IPUMS has been meticulously cleaned and analyzed for completeness and missing patterns. According to its documentation, “missing, illegible and inconsistent values” in variables are edited or allocated, and tagged with data quality flags to indicate the kind of edits applied<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a>. When understanding the missing values in the outcome data, which we will use for this project, we need bear in mind that the above-mentioned sources of missing values are cleaned and interpolated by the IPUMS team to the best they can.</p>
 <p>To reduce the visual clutter in the plot of missing patterns, we rename variable names into 3 letter abbreviations and remove the variables that are not related to working conditions such as person unique identifier. In total, there are 306 missing patterns, but tails are almost negligible in terms of their percentage. Thus, we focus on top 30 patterns which made up the majority of the data. To do this, we augment the <code>plot_missing</code> function to add a parameter to control how many patterns to display in graph. The results are shown below.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="missing-values.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load data</span></span>
-<span id="cb1-2"><a href="missing-values.html#cb1-2" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="at">file =</span> <span class="st">&#39;data/ipums_nyc_1_percent_decoded.csv&#39;</span>,<span class="at">na.strings=</span><span class="fu">c</span>(<span class="st">&quot;&quot;</span>))</span>
+<span id="cb1-2"><a href="missing-values.html#cb1-2" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="at">file =</span> <span class="st">&#39;./data/ipums.csv&#39;</span>,<span class="at">na.strings=</span><span class="fu">c</span>(<span class="st">&quot;&quot;</span>,<span class="st">&quot;NA&quot;</span>))</span>
 <span id="cb1-3"><a href="missing-values.html#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-4"><a href="missing-values.html#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Abbreviate variable names </span></span>
-<span id="cb1-5"><a href="missing-values.html#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(df) <span class="ot">&lt;-</span><span class="fu">c</span>(<span class="st">&quot;YR&quot;</span>, <span class="st">&quot;SER&quot;</span>, <span class="st">&quot;PER&quot;</span>, <span class="st">&quot;SEX&quot;</span>, <span class="st">&quot;RAC&quot;</span>, <span class="st">&quot;AGE&quot;</span>, <span class="st">&quot;REL&quot;</span>, </span>
-<span id="cb1-6"><a href="missing-values.html#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;MAR&quot;</span>, <span class="st">&quot;FS&quot;</span>, <span class="st">&quot;BP&quot;</span>, <span class="st">&quot;MBP&quot;</span>, <span class="st">&quot;FBP&quot;</span>, <span class="st">&quot;NAT&quot;</span>, <span class="st">&quot;CIT&quot;</span>, </span>
-<span id="cb1-7"><a href="missing-values.html#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;YRI&quot;</span>, <span class="st">&quot;LIT&quot;</span>, <span class="st">&quot;EDS&quot;</span>, <span class="st">&quot;OCC&quot;</span>, <span class="st">&quot;OCS&quot;</span>, <span class="st">&quot;PRS&quot;</span>, </span>
-<span id="cb1-8"><a href="missing-values.html#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;IND&quot;</span>, <span class="st">&quot;EMP&quot;</span>, <span class="st">&quot;INC&quot;</span>, <span class="st">&quot;OCA&quot;</span>, <span class="st">&quot;ICA&quot;</span>)</span>
+<span id="cb1-5"><a href="missing-values.html#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(df) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;YEAR&quot;</span>, <span class="st">&quot;CITY&quot;</span>, <span class="st">&quot;FAMS&quot;</span>, <span class="st">&quot;REL&quot;</span>, <span class="st">&quot;SEX&quot;</span>, <span class="st">&quot;AGE&quot;</span>, <span class="st">&quot;MAR&quot;</span>, </span>
+<span id="cb1-6"><a href="missing-values.html#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;RAC&quot;</span>, <span class="st">&quot;BPL&quot;</span>, <span class="st">&quot;MBP&quot;</span>, <span class="st">&quot;FBP&quot;</span>, <span class="st">&quot;NAT&quot;</span>, <span class="st">&quot;CIT&quot;</span>, <span class="st">&quot;YRI&quot;</span>, </span>
+<span id="cb1-7"><a href="missing-values.html#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;SCH&quot;</span>, <span class="st">&quot;LIT&quot;</span>, <span class="st">&quot;LAB&quot;</span>, <span class="st">&quot;OCC&quot;</span>, <span class="st">&quot;IND&quot;</span>, <span class="st">&quot;INC&quot;</span>, </span>
+<span id="cb1-8"><a href="missing-values.html#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;OCS&quot;</span>, <span class="st">&quot;EDS&quot;</span>, <span class="st">&quot;OCA&quot;</span>, <span class="st">&quot;ICA&quot;</span>, <span class="st">&quot;YUS&quot;</span>)</span>
 <span id="cb1-9"><a href="missing-values.html#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-10"><a href="missing-values.html#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove variable irrelevant to working condition analysis</span></span>
-<span id="cb1-11"><a href="missing-values.html#cb1-11" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> <span class="fu">select</span> (<span class="sc">-</span><span class="fu">c</span>(<span class="st">&quot;YR&quot;</span>, <span class="st">&quot;SER&quot;</span>, <span class="st">&quot;PER&quot;</span>, <span class="st">&quot;FS&quot;</span>, <span class="st">&quot;NAT&quot;</span>))</span>
+<span id="cb1-11"><a href="missing-values.html#cb1-11" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> <span class="fu">select</span> (<span class="sc">-</span><span class="fu">c</span>(<span class="st">&quot;YEAR&quot;</span>, <span class="st">&quot;CITY&quot;</span>, <span class="st">&quot;FAMS&quot;</span>))</span>
 <span id="cb1-12"><a href="missing-values.html#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-13"><a href="missing-values.html#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot top 30 missing patterns </span></span>
 <span id="cb1-14"><a href="missing-values.html#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_missing_top</span>(df, <span class="at">percent =</span> <span class="cn">TRUE</span>, <span class="at">top_patterns =</span> <span class="dv">30</span>)</span></code></pre></div>
-<p><img src="finalproj_files/figure-html/unnamed-chunk-5-1.png" width="864" /></p>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-3-1.png" width="864" /></p>
 <p>Focusing the proportion of missing values for different variables, we first observe that basic demographic variables, such as <code>age</code>, <code>sex</code>, <code>race</code>, <code>relationship to head of household</code>, have no missing value for the entirety of the dataset. This is understandable because these demographic information are what the census bureau primarily want to collect, and these questions are asked consistently across the decades.</p>
 <p>Moving to the left side of the top bar chart, we can see that <code>income</code>, <code>year of immigration</code>, and <code>citizenship status</code>, are the three variables with the highest proportion of missing values. The proportion of missing value of <code>income</code> is due to the fact that this variable is only introduced in the year 1940, the last of the nine census years that our dataset covers. Similarly, influenced by the evolving US immigration law, <code>year of immigration</code> and <code>citizenship status</code> fields came in and out of the census survey questionnaires across the century, resulting in higher percentage of missing values.</p>
-<p>The next groups of variables with relatively high level of missing values are all occupation-related. In fact, they almost have the identical proportion of missing values. After digging into the documentation and data transformation process, we quickly realize these variables all stem from two root variable <code>OCC</code> (occupation) and <code>IND</code> (industry). <code>OCA</code> and <code>ICA</code> stand for occupation category and industry category, which are higher level categorization of the detailed information. <code>OCS</code>, <code>EDS</code>, <code>PRS</code> are scores that captures the wage level, education level, and prestige level of a certain occupation, thus are tied to the <code>OCC</code> variable<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>. Overall, 39% of the population doesn’t have <code>OCC</code> information. When inspecting their demographic information, they tend to be younger children or females.</p>
+<p>The next groups of variables with relatively high level of missing values are all occupation-related. In fact, they almost have the identical proportion of missing values. After digging into the documentation and data transformation process, we quickly realize these variables all stem from two root variable <code>OCC</code> (occupation) and <code>IND</code> (industry). <code>OCA</code> and <code>ICA</code> stand for occupation category and industry category, which are higher level categorization of the detailed information. <code>OCS</code>, <code>EDS</code>, <code>PRS</code> are scores that captures the wage level, education level, and prestige level of a certain occupation, thus are tied to the <code>OCC</code> variable<a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a>. Overall, 39% of the population doesn’t have <code>OCC</code> information. When inspecting their demographic information, they tend to be younger children or females.</p>
 <p>Now we switch our attention to the missing patterns. One noticeable trend in the patterns is that the occupation related variables tend to be missing together, a phenomenon discussed and explained in the previous paragraph. The most common missing pattern is the population with no occupation information and no year of immigration, which implies they are native-born residents doing non-wage earning house keeping at home. The next three most common patterns are very similar to the first one, and together they account for about one-third of the population. These missing patterns begs the question of why so many people are missing from the workspace and labor force.</p>
 
 </div>
 <div class="footnotes">
 <hr />
-<ol start="1">
-<li id="fn1"><p>Introduction to Data Editing and Allocation. “IPUMS USA.” IPUMS.org. Accessed 2021 Nov 18. <a href="https://usa.ipums.org/usa/flags.shtml" class="uri">https://usa.ipums.org/usa/flags.shtml</a><a href="missing-values.html#fnref1" class="footnote-back">↩︎</a></p></li>
-<li id="fn2"><p>Integrated Occupation And Industry Codes And Occupational Standing Variables In The Ipums. “IPUMS USA.” IPUMS.org. Accessed 2021 Nov 18. <a href="https://usa.ipums.org/usa/chapter4/chapter4.shtml" class="uri">https://usa.ipums.org/usa/chapter4/chapter4.shtml</a><a href="missing-values.html#fnref2" class="footnote-back">↩︎</a></p></li>
+<ol start="3">
+<li id="fn3"><p>Introduction to Data Editing and Allocation. “IPUMS USA.” IPUMS.org. Accessed 2021 Nov 18. <a href="https://usa.ipums.org/usa/flags.shtml" class="uri">https://usa.ipums.org/usa/flags.shtml</a><a href="missing-values.html#fnref3" class="footnote-back">↩︎</a></p></li>
+<li id="fn4"><p>Integrated Occupation And Industry Codes And Occupational Standing Variables In The Ipums. “IPUMS USA.” IPUMS.org. Accessed 2021 Nov 18. <a href="https://usa.ipums.org/usa/chapter4/chapter4.shtml" class="uri">https://usa.ipums.org/usa/chapter4/chapter4.shtml</a><a href="missing-values.html#fnref4" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>

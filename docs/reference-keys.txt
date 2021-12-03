@@ -5,3 +5,9 @@ missing-values
 results
 interactive-component
 conclusion
+ipums-introduction
+scope
+creating-data-extract
+ipumsr
+codebook
+decoding-handling-na-missing-and-other-category-codes-enforce-data-type-reduce-cardinality

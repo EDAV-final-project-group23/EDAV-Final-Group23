@@ -1,1 +1,125 @@
 # Data transformation
+
+## Decoding, Handling n/a, missing, and other category codes, Enforce data type, Reduce cardinality
+
+```{r}
+library(ipumsr) 
+library(tidyverse) 
+library(sf)
+```
+
+```{r}
+
+ddi <- read_ipums_ddi("./data/usa_00038.xml")
+data <- read_ipums_micro(ddi)
+data <- data %>% select(-c(SERIAL, PERNUM, RELATED, RACED, BPLD, MBPLD, FBPLD, YRSUSA2, MTONGUE, MTONGUED, PRESGL))
+
+# OCC1950CAT, IND1950CAT (augmentation)
+occ_cat <- read_csv("./data/occupation_categories.csv")
+ind_cat <- read_csv("./data/industry_categories.csv")
+data <- left_join(data, occ_cat, by ='OCC1950')
+data <- left_join(data, ind_cat, by ='IND1950')
+
+# NA relabeling
+data$OCC1950 <- lbl_na_if(data$OCC1950, ~.val > 970) %>% as_factor()
+data$IND1950 <- lbl_na_if(data$IND1950, ~.val >= 975 | .val == 0) %>% as_factor()
+data$OCCSCORE <- as.numeric(data$OCCSCORE)
+
+df <- as_factor(data)
+# YEAR
+df$YEAR <- as.numeric(as.character(df$YEAR))
+# CITY 
+## table(df$CITY)
+# FAMSIZE
+df$FAMSIZE <- as.character(df$FAMSIZE)
+df$FAMSIZE[df$FAMSIZE == "1 family member present"] = "1"
+df$FAMSIZE[df$FAMSIZE == "2 family members present"] = "2"
+df$FAMSIZE <- as.numeric(df$FAMSIZE)
+# RELATE
+df$RELATE <- as.character(df$RELATE)
+df$RELATE[df$RELATE == "Head/Householder"] = "Head"
+df$RELATE[df$RELATE == "Child-in-law"] = "Child"
+df$RELATE[df$RELATE == "Grandchild"] = "Child"
+df$RELATE[df$RELATE == "Parent-in-Law"] = "Parent"
+df$RELATE[df$RELATE == "Sibling-in-Law"] = "Sibling"
+df$RELATE[df$RELATE == "Other relatives"] = "Relative"
+df$RELATE[df$RELATE == "Partner, friend, visitor"] = "Relative"
+df$RELATE[df$RELATE == "Other non-relatives"] = "Other"
+df$RELATE[df$RELATE == "Institutional inmates"] = "Inmate"
+df$RELATE <- as.factor(df$RELATE)
+# SEX
+## table(df$SEX)
+# AGE
+df$AGE <- as.character(df$AGE)
+df$AGE[df$AGE == "Less than 1 year old"] = "0"
+df$AGE[df$AGE == "90 (90+ in 1980 and 1990)"] = "90"
+df$AGE[df$AGE %in% c("100 (100+ in 1960-1970)", "112 (112+ in the 1980 internal data)", "115 (115+ in the 1990 internal data)")] = "100"
+df$AGE <- as.numeric(df$AGE)
+# MARST
+df$MARST <- as.character(df$MARST)
+df$MARST[df$MARST == 'Married, spouse present'] = 'Married'
+df$MARST[df$MARST == 'Never married/single'] = 'Single'
+df$MARST[df$MARST %in% c('Married, spouse absent','Separated','Divorced','Widowed')] = 'Widowed or Divorced'
+df$MARST <- as.character(df$MARST)
+df$MARST <- as.factor(df$MARST)
+# RACE
+df$RACE <- as.character(df$RACE)
+df$RACE[df$RACE == 'Black/African American/Negro'] = 'Black'
+df$RACE[!(df$RACE %in% c('White','Black'))] = 'Other'
+df$RACE <- as.factor(df$RACE)
+# BPL
+# MBPL
+# FBPL
+# NATIVITY
+df$NATIVITY <- as.character(df$NATIVITY)
+df$NATIVITY[df$NATIVITY %in% c("Native born, and both parents native born","Native born, and father foreign, mother native","Native born, and mother foreign, father native")] = 'Native born with native parent'
+df$NATIVITY[df$NATIVITY == 'Native born, and both parents foreign'] = 'Native born with foreign parent'
+df$NATIVITY[df$NATIVITY == 'N/A'] = NA
+df$NATIVITY <- as.factor(df$NATIVITY)
+# CITIZEN
+df$CITIZEN <- as.character(df$CITIZEN)
+df$CITIZEN[df$CITIZEN == 'Not a citizen, but has received first papers'] = 'Applying citizenship'
+df$CITIZEN[!(df$CITIZEN %in% c('Naturalized citizen','Not a citizen', 'Applying citizenship'))] = NA
+df$CITIZEN <- as.factor(df$CITIZEN)
+# YRIMMIG
+df$YRIMMIG <- as.character(df$YRIMMIG)
+df$YRIMMIG = str_replace(df$YRIMMIG, " \\s*\\([^\\)]+\\)", "")
+df$YRIMMIG[df$YRIMMIG %in% c('N/A', 'Not reported')] = NA
+df$YRIMMIG <- as.numeric(df$YRIMMIG)
+# SCHOOL
+df$SCHOOL <- as.character(df$SCHOOL)
+df$SCHOOL[df$SCHOOL %in% c("N/A", "Unknown", "Missing")] = NA
+df$SCHOOL <- as.factor(df$SCHOOL)
+# LIT
+df$LIT <- as.character(df$LIT)
+df$LIT[df$LIT %in% c("Yes, literate (reads and writes)","Cannot read, can write","Cannot write, can read")] = 'Yes, literate'
+df$LIT[df$LIT == 'No, illiterate (cannot read or write)'] = 'No, illiterate'
+df$LIT[df$LIT %in% c("N/A", "Unknown, illegible or blank")] = NA
+df$LIT <- as.factor(df$LIT)
+# LABFORCE
+df$LABFORCE <- as.character(df$LABFORCE)
+df$LABFORCE[df$LABFORCE == 'N/A'] = NA
+df$LABFORCE <- as.factor(df$LABFORCE)
+# OCC1950
+# IND1950
+# INCWAGE
+df$INCWAGE <- as.character(df$INCWAGE)
+df$INCWAGE[df$INCWAGE %in% c('N/A','Missing')] = NA
+df$INCWAGE <- as.numeric(df$INCWAGE)
+# OCCSCORE
+df$OCCSCORE[df$OCCSCORE == 0] = NA
+# EDSCOR50
+df$EDSCOR50 <- as.character(df$EDSCOR50)
+df$EDSCOR50[df$EDSCOR50 %in% c('N/A')] = NA
+df$EDSCOR50 <- as.numeric(df$EDSCOR50)
+
+# YRINUSA (augmentation)
+df <- df %>%
+ mutate(
+  YRINUSA = YEAR - YRIMMIG
+ )
+
+write.csv(df, file = './data/ipums.csv', row.names = FALSE)
+
+```
+
