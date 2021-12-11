@@ -89,20 +89,14 @@
 <li class="chapter" data-level="4" data-path="missing-values.html"><a href="missing-values.html"><i class="fa fa-check"></i><b>4</b> Missing values</a></li>
 <li class="chapter" data-level="5" data-path="results.html"><a href="results.html"><i class="fa fa-check"></i><b>5</b> Results</a>
 <ul>
-<li class="chapter" data-level="5.1" data-path="results.html"><a href="results.html#exploratory-analysis"><i class="fa fa-check"></i><b>5.1</b> Exploratory Analysis</a>
+<li class="chapter" data-level="5.1" data-path="results.html"><a href="results.html#working-conditions"><i class="fa fa-check"></i><b>5.1</b> Working Conditions</a>
 <ul>
-<li class="chapter" data-level="5.1.1" data-path="results.html"><a href="results.html#household-structure"><i class="fa fa-check"></i><b>5.1.1</b> Household Structure</a></li>
-<li class="chapter" data-level="5.1.2" data-path="results.html"><a href="results.html#education"><i class="fa fa-check"></i><b>5.1.2</b> Education</a></li>
-<li class="chapter" data-level="5.1.3" data-path="results.html"><a href="results.html#employment"><i class="fa fa-check"></i><b>5.1.3</b> Employment</a></li>
+<li class="chapter" data-level="5.1.1" data-path="results.html"><a href="results.html#gender-and-employment"><i class="fa fa-check"></i><b>5.1.1</b> Gender and Employment</a></li>
+<li class="chapter" data-level="5.1.2" data-path="results.html"><a href="results.html#race-and-employment"><i class="fa fa-check"></i><b>5.1.2</b> Race and Employment</a></li>
 </ul></li>
-<li class="chapter" data-level="5.2" data-path="results.html"><a href="results.html#minority-employment"><i class="fa fa-check"></i><b>5.2</b> Minority Employment</a>
-<ul>
-<li class="chapter" data-level="5.2.1" data-path="results.html"><a href="results.html#gender-and-employment"><i class="fa fa-check"></i><b>5.2.1</b> Gender and Employment</a></li>
-<li class="chapter" data-level="5.2.2" data-path="results.html"><a href="results.html#race-and-employment"><i class="fa fa-check"></i><b>5.2.2</b> Race and Employment</a></li>
-</ul></li>
-<li class="chapter" data-level="5.3" data-path="results.html"><a href="results.html#education-and-employment"><i class="fa fa-check"></i><b>5.3</b> Education and Employment</a></li>
-<li class="chapter" data-level="5.4" data-path="results.html"><a href="results.html#time-series-and-employment"><i class="fa fa-check"></i><b>5.4</b> Time series and Employment</a></li>
-<li class="chapter" data-level="5.5" data-path="results.html"><a href="results.html#conclusion"><i class="fa fa-check"></i><b>5.5</b> Conclusion</a></li>
+<li class="chapter" data-level="5.2" data-path="results.html"><a href="results.html#education-and-employment"><i class="fa fa-check"></i><b>5.2</b> Education and Employment</a></li>
+<li class="chapter" data-level="5.3" data-path="results.html"><a href="results.html#time-series-and-employment"><i class="fa fa-check"></i><b>5.3</b> Time series and Employment</a></li>
+<li class="chapter" data-level="5.4" data-path="results.html"><a href="results.html#conclusion"><i class="fa fa-check"></i><b>5.4</b> Conclusion</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="interactive-component.html"><a href="interactive-component.html"><i class="fa fa-check"></i><b>6</b> Interactive component</a></li>
 <li class="chapter" data-level="7" data-path="conclusion-1.html"><a href="conclusion-1.html"><i class="fa fa-check"></i><b>7</b> Conclusion</a></li>
@@ -127,146 +121,100 @@
             <section class="normal" id="section-">
 <div id="results" class="section level1" number="5">
 <h1><span class="header-section-number">Chapter 5</span> Results</h1>
-<p>Before analysis, we first do data cleaning and remove several columns and rows. The following data contains features including three categories, which are household structure, education, employment.</p>
+<p>Before analysis, we first do data cleaning and select several features and data for analyzing. The following data contains features including three main categories, which are minority features, education features, and employment features.</p>
 <ol style="list-style-type: decimal">
-<li>Household Structure: FAMSIZE(Family Size), RELATE(Relation to the household head), SEX(Gender), AGE(Age), RACE(Race)</li>
-<li>Education: SCHOOL(Whether in school or not), EDSCOR50(The percentage of people in the respondent’s occupational category who had completed one or more years of college), LIT(Whether could read or write or not)</li>
-<li>Employment: LABFORCE(Whether in the job market), OCCSCORE(Occupational income score), OCC1950CAT(Occupational category in 1950 standard), IND19050CAT(Industry category in 1950 standard)</li>
+<li>Minority Feature: Respondents Age, Respondents Race</li>
+<li>Education Feature: LIT(Whether could read or write or not)</li>
+<li>Employment Feature: LABFORCE(Whether in the job market), OCCSCORE(Occupational income score), OCC1950CAT(Occupational category in 1950 standard), IND19050CAT(Industry category in 1950 standard)</li>
 </ol>
-<p>Then because we hope to analyze the employment, therefore we only include the people who are legal to work. We filter the people between 18 years old and 66 years old, who are legal to work in the United States.</p>
-<div id="exploratory-analysis" class="section level2" number="5.1">
-<h2><span class="header-section-number">5.1</span> Exploratory Analysis</h2>
-<div id="household-structure" class="section level3" number="5.1.1">
-<h3><span class="header-section-number">5.1.1</span> Household Structure</h3>
+<p>The following analysis will give a glimpse of the minority working conditions, the influence of education levels, and the working conditions transition across different years.</p>
+<div id="working-conditions" class="section level2" number="5.1">
+<h2><span class="header-section-number">5.1</span> Working Conditions</h2>
+<div id="gender-and-employment" class="section level3" number="5.1.1">
+<h3><span class="header-section-number">5.1.1</span> Gender and Employment</h3>
 <ol style="list-style-type: decimal">
-<li>Family Size: From the bar chart of family size, we conclude that most people belong to a 1-6 people family.</li>
+<li>Labor force percentage for each gender: From the following figure, we could conclude that most of the male are in the labor force, while half of the female are not in the labor force. There is significant difference in working conditions between male and female.</li>
 </ol>
 <p><img src="finalproj_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 <ol start="2" style="list-style-type: decimal">
-<li>Relation to the Household Head: Most family consists of a household head, his/her spouse and their children. Some families include sibling, relative, and parent, etc.</li>
+<li>Occupation score for each gender: The occupation score represents the salary for the workers. As shown in the following figure, the occupation score for male workers are significant higher than the female workers.</li>
 </ol>
 <p><img src="finalproj_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
 <ol start="3" style="list-style-type: decimal">
-<li>Sex: the number of male is similar to the number of female in this survey.</li>
+<li>Occupation category for each gender: There is difference between each gender for the occupation categories. Female tends to work as operatives, clerical and kindred and private household service workers. Male tends to work as craftsmen, managersm and laborers.</li>
 </ol>
 <p><img src="finalproj_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
 <ol start="4" style="list-style-type: decimal">
-<li>Age: Most of the respondents in the survey are from 20 years old to 40 years old. In this analysis, we only include people from 18 to 66 years old.</li>
-</ol>
-<p><img src="finalproj_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
-<ol start="5" style="list-style-type: decimal">
-<li>Race: Most of the respondents in the survey are white people, and a small number of respondents are black people and others.</li>
-</ol>
-<p><img src="finalproj_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
-</div>
-<div id="education" class="section level3" number="5.1.2">
-<h3><span class="header-section-number">5.1.2</span> Education</h3>
-<ol style="list-style-type: decimal">
-<li>School: Most of the respondents are not in school, which means they are able to work.</li>
-</ol>
-<p><img src="finalproj_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
-<ol start="2" style="list-style-type: decimal">
-<li>Literate Level: Most people can read and write, while some respondents did not respond.</li>
-</ol>
-<p><img src="finalproj_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
-<ol start="3" style="list-style-type: decimal">
-<li>Education Score: most of the score for the occupational categories are under 50%, which means most of the work do not require a college degree.</li>
-</ol>
-<p><img src="finalproj_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
-</div>
-<div id="employment" class="section level3" number="5.1.3">
-<h3><span class="header-section-number">5.1.3</span> Employment</h3>
-<ol style="list-style-type: decimal">
-<li>Labforce: More than half of the respondents are in the job markets.</li>
-</ol>
-<p><img src="finalproj_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
-<ol start="2" style="list-style-type: decimal">
-<li>Occupation Score: The occupation score of the respondents are mostly around 20.</li>
-</ol>
-<p><img src="finalproj_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
-<ol start="3" style="list-style-type: decimal">
-<li>Occupation Category: Among all people who have work. Most of them are operatives and craftsmen.</li>
-</ol>
-<p><img src="finalproj_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
-<ol start="4" style="list-style-type: decimal">
-<li>Industry Category: Among all the workers, most of them worked in retail, manufacturing, and personal services.</li>
-</ol>
-<p><img src="finalproj_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
-</div>
-</div>
-<div id="minority-employment" class="section level2" number="5.2">
-<h2><span class="header-section-number">5.2</span> Minority Employment</h2>
-<div id="gender-and-employment" class="section level3" number="5.2.1">
-<h3><span class="header-section-number">5.2.1</span> Gender and Employment</h3>
-<ol style="list-style-type: decimal">
-<li>Labor force percentage for each gender: From the following figure, we could conclude that most of the male are in the labor force, while half of the female are not in the labor force. There is significant different in working conditions between male and female.</li>
-</ol>
-<p><img src="finalproj_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
-<ol start="2" style="list-style-type: decimal">
-<li>Occupation score for each gender: The occupation score represents the salary for the workers. As shown in the following figure, the occupation score for male workers are significant higher than the female workers.</li>
-</ol>
-<p><img src="finalproj_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
-<ol start="3" style="list-style-type: decimal">
-<li>Occupation category for each gender: There is difference between each gender for the occupation categories. Female tends to work as operatives, clerical and kindred and private household service workers. Male tends to work as craftsmen, managersm and laborers.</li>
-</ol>
-<p><img src="finalproj_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
-<ol start="4" style="list-style-type: decimal">
 <li>Industry category for each gender: There is difference between male and female in industry categories. Female tends to work in manufacturing-nondurable goods, personal services, and professional and related services. Male tends to work in durable goods manufacturing, construction, and transportation.</li>
 </ol>
-<p><img src="finalproj_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
 </div>
-<div id="race-and-employment" class="section level3" number="5.2.2">
-<h3><span class="header-section-number">5.2.2</span> Race and Employment</h3>
+<div id="race-and-employment" class="section level3" number="5.1.2">
+<h3><span class="header-section-number">5.1.2</span> Race and Employment</h3>
 <ol style="list-style-type: decimal">
 <li>Labor force percentage for each Race: As shown in the following figure, there is little difference between each race in the labforce percentage. Black people working percentage is litter higher than white people.</li>
 </ol>
-<p><img src="finalproj_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
 <ol start="2" style="list-style-type: decimal">
 <li>Occupation Score for each Race: Although there is little difference between each race in working percentage, there is significant difference between occupation score. It shows white people have significantly higher salary than black people and other races. And the variance in salary for white people is lees than other races. Therefore, it means white people salary is high and centered.</li>
 </ol>
-<p><img src="finalproj_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
 <ol start="3" style="list-style-type: decimal">
 <li>Occupation category for each Race: Black people tend to work as operatives, service workers and laborers. White people tend to work as craftsmen, clerical and kindred, managers and sales workers.</li>
 </ol>
-<p><img src="finalproj_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
 <ol start="4" style="list-style-type: decimal">
 <li>Industry category for each race: Black people tend to work in personal services industry.</li>
 </ol>
-<p><img src="finalproj_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
 </div>
 </div>
-<div id="education-and-employment" class="section level2" number="5.3">
-<h2><span class="header-section-number">5.3</span> Education and Employment</h2>
+<div id="education-and-employment" class="section level2" number="5.2">
+<h2><span class="header-section-number">5.2</span> Education and Employment</h2>
 <ol style="list-style-type: decimal">
 <li>Labor force for each gender and literate: As shown in the figure, there is little difference between those who are literate and who are illiterate in male workers. However, female who are literate are more likely in the labor force.</li>
 </ol>
-<p><img src="finalproj_files/figure-html/unnamed-chunk-25-1.png" width="672" /></p>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
 <ol start="2" style="list-style-type: decimal">
 <li>Labor force for each race and literate: From the following figure, the people who are literate tend to be in the labor force. Especially for white people, white people who are literate significantly tend to work in the labor force.</li>
 </ol>
-<p><img src="finalproj_files/figure-html/unnamed-chunk-26-1.png" width="672" /></p>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
 <ol start="3" style="list-style-type: decimal">
 <li>Occupation score for each race and literate: From the following figure, we conclude that people who are literate tend to have higher salary than those who are not literate. Especially for female workers, literate female workers median salary are significantly highers than illiterate female workers.</li>
 </ol>
-<p><img src="finalproj_files/figure-html/unnamed-chunk-27-1.png" width="672" /></p>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
 <ol start="4" style="list-style-type: decimal">
 <li>Occupation score for each race and literate: The figure shows literate people tend to have higher salary. Especially for black people, the median salary for literate black workers are higher than illiterate black workers.</li>
 </ol>
-<p><img src="finalproj_files/figure-html/unnamed-chunk-28-1.png" width="672" /></p>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
 <ol start="5" style="list-style-type: decimal">
 <li>Occupation category and literate level: The following figure shows illiterate people tend to work as operatives, craftsmen and laborers, and literate people tend to work as clerical and kindred, sales workers, and professional.</li>
 </ol>
-<p><img src="finalproj_files/figure-html/unnamed-chunk-29-1.png" width="672" /></p>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
 <ol start="6" style="list-style-type: decimal">
 <li>Industry category and literate level: illiterate people tend to work in retail, manufacuring-nondurable goods, and personal services area. And literate people can work in industries like finance, business, public administrationm, etc.</li>
 </ol>
-<p><img src="finalproj_files/figure-html/unnamed-chunk-30-1.png" width="672" /></p>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
 </div>
-<div id="time-series-and-employment" class="section level2" number="5.4">
-<h2><span class="header-section-number">5.4</span> Time series and Employment</h2>
+<div id="time-series-and-employment" class="section level2" number="5.3">
+<h2><span class="header-section-number">5.3</span> Time series and Employment</h2>
+<ol style="list-style-type: decimal">
+<li>Labor force for races and genders from 1850 to 1940: From the following figure, we could conclude that from 1850 to 1940, more and more female white people enter the labor force. The male workers start to enter the labore force from 1850 to 1920, and then some of them quit the labor force in 1930s and 1940s.</li>
+</ol>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
+<ol start="2" style="list-style-type: decimal">
+<li>Occupation score for races and genders from 1850 to 1940: As shown in the figure, from 1850 to 1940, the female occupation score increase, especially for white people. And the black male workers salary increase a little. The salary for white male is steady acoross different years.</li>
+</ol>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
 </div>
-<div id="conclusion" class="section level2" number="5.5">
-<h2><span class="header-section-number">5.5</span> Conclusion</h2>
+<div id="conclusion" class="section level2" number="5.4">
+<h2><span class="header-section-number">5.4</span> Conclusion</h2>
+<ol style="list-style-type: decimal">
+<li>The minority working conditions are worse than the majority. Female workers who are in the labor force percentage is significantly less than the male workers, and the salary for female workers is less than male workers. There is little difference between difference races in the labor force. However, the salary for the male workers are less than white people.</li>
+<li>There are significant difference in industry categories and types of work between male workers and female workers. Female workers tend to work in the industry like personal services as services workers, while male workers tend to work in construction, transportation, etc. as craftsman, laborer, etc. And the black people tend to work in personal services as services workers, while white people tend to work in officials, finance, etc. as managers or professionals.</li>
+<li>Education levels significantly influence the working conditions. Literate people tend to have higher salary, and work at officials, business, finance area as professionals or managers. Illiterate people have lower salary, and work at construction, manufacturing as workers and craftsman.</li>
+<li>From 1850 to 1940, minority people working conditions improve a lot. The salary and percentage of people in the labor force increase for female workers and black workers.</li>
+</ol>
 
 </div>
 </div>
