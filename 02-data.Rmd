@@ -24,14 +24,14 @@ https://doi.org/10.18128/D010.V11.0], which is part of the database that covers 
 
 ## Data Generation Process
 
-```{r echo=FALSE, fig.cap="Data Generation Process", out.width = '80%'}
+```{r echo=FALSE, fig.cap="Data Generation Process", out.width = '100%'}
 knitr::include_graphics("./assets/collection_process.png")
 ```
 The data were originally collected by census takers, who were recruited and trained by the Census Bureau to go door to door and collect the demographic information. The raw entry are logged on sheets of paper and stored in archives across the country. With recent development and wide-spread of digitization technology, many of the census records are scanned and digitized. Furthermore, volunteers and commercial teams have been transcribing the records based on the digital scans to convert the record into a fully machine-readable format. National archive and organization like Ancestry Library have taken on such transcription effort. Finally, the IPUMS project, along with many partners in the area, clean the transcribed data, harmonize the variables across different years, and encode the data in a standard coding system for efficient storage and retrieval. We are able to analyze the data we have today thanks to the awe-inspiring work of all the parties involved in this long journey of data generation process. 
 
-## Extraction Process
+## Data Extraction Workflow
 
-```{r echo=FALSE, fig.cap="Data Generation Process", out.width = '80%'}
+```{r echo=FALSE, fig.cap="Data Extraction Workflow", out.width = '100%'}
 knitr::include_graphics("./assets/extraction_process.png")
 ```
 The whole IPUMS USA database is huge, so we need to create an extract based on the scope of our project. The first step is to select samples, which specifies from which year and what percentage of datasets to extract. Second step is to select variables, which are indexed by topical and alphabetical order. Finally, we add a filter based on city variable to limit the scope to NYC, since the data for the whole country is more than 70 GB and not relevant to our project.
@@ -42,7 +42,7 @@ We choose the variables based on 3 criteria: relevancy, availability, usability.
 
 There are 333,959 records in the dataset we analyze, which is an one-percent random sample of the full-count data. The full-count data is larger than the RAM of our computer thus we conduct sampling, but the code and analysis is applicable to the full-count given more computing power. 
 
-## Issues with data
+## Issues with the Data
 
 The IPUMS USA database is systematically cleaned and edited, thus most data quality issues are dealt with and marked with data quality flags. For our specific use case, we have encountered two data issues. First, some categorical fields have very infrequent entries that are not relevant to our analysis. In other words, the categorization are too detailed and add little to our faceted visualizations. Second, variables like occupations and industries have a high cardinality and the frequencies of each value are about evenly distributed. For these variables, we need to cluster values into meaningful groups to make comprehensible graphs. These two data issues are addressed in the next chapter - data cleaning.
 
