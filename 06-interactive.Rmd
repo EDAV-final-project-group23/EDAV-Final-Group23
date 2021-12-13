@@ -1,14 +1,21 @@
+---
+#output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
 # Animated bar chart
 
 In this chapter, we plot an animated graph to show how labor force for each gender has changed over the years (from 1860 to 1940). Since the text cannot be used in transition in D3, we placed a vertical axis on the left of the bar chart with years. An orange ball keeps moving along the axis to indicate which year's statistics the graph is showing. To make the change in the bar chart more obvious, we alternatively change the filling color of the bars between blue and green every time the year changes.
 
-```{r}
+```{r 1}
 library(tidyverse)
 library(patchwork)
 ```
 
-```{r}
-df <- read.csv(file = './data/ipums.csv',na.strings=c("NA"))
+```{r compress}
+df <- read.csv(file = '~/Desktop/courses/5702/final project/ipums.csv',na.strings=c("NA"))
 drop_columns = c('BPL', 'MBPL', 'FBPL', 'NATIVITY', 'CITIZEN', 'YRIMMIG', 
                  'YRINUSA', 'INCWAGE', 'MARST', 'OCC1950', 'IND1950', 'CITY')
 data <- df %>%
@@ -17,7 +24,7 @@ data <- df %>%
 ```
 
 
-```{r}
+```{r }
 data%>%group_by(YEAR, SEX)%>%count(LABFORCE)%>%mutate('bar_height'=n/28000*400)
 ```
 
@@ -32,13 +39,13 @@ Conclusions:
 <script>
 // Create svg and initial bars
 
-      var w = 500;
+      var w = 1000;
       var h = 350;
       var margin = {
         top: 25,
-        right: 0,
+        right: 100,
         bottom: 75,
-        left: 100,
+        left: 600,
       };
       var innerWidth = w - margin.left - margin.right;
       var innerHeight = h - margin.top - margin.bottom;
@@ -76,7 +83,7 @@ Conclusions:
 
       svg
         .append('rect')
-        .attr('x', 0)
+        .attr('x', 500)
         .attr('y', 0)
         .attr('width', w)
         .attr('height', h)
@@ -287,7 +294,7 @@ bars.transition().delay(12000)
           (d) => innerHeight - yScale(d.value)
         ).attr('fill', 'forestgreen'); 
       
-    svg.append("circle").attr("cx", "67").attr("cy", "275").attr("r", "8")
+    svg.append("circle").attr("cx", "567").attr("cy", "275").attr("r", "8")
   .attr("fill", "orange");
       my_circle = svg.select('circle')
       my_circle.transition().delay(0)
@@ -317,10 +324,9 @@ bars.transition().delay(12000)
                   .scale(scale);
 
     svg.append("g")
-       .attr("transform", "translate(50, 10)")
+       .attr("transform", "translate(550, 10)")
        .call(y_axis);
       
-    svg.append('text').text('Labor Force by genders across the years').attr('x',130).attr('y',325)
-    
+    svg.append('text').text('Labor Force by genders across the years').attr('x',630).attr('y',325)
 </script>
 
