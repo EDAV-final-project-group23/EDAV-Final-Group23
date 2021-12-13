@@ -1,20 +1,13 @@
----
-#output: html_document
----
-
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
-## Animated bar chart
+# Animated bar chart
 
 In this chapter, we plot an animated graph to show how labor force for each gender has changed over the years (from 1860 to 1940). Since the text cannot be used in transition in D3, we placed a vertical axis on the left of the bar chart with years. An orange ball keeps moving along the axis to indicate which year's statistics the graph is showing. To make the change in the bar chart more obvious, we alternatively change the filling color of the bars between blue and green every time the year changes.
 
-```{r 1}
+```{r}
 library(tidyverse)
 library(patchwork)
 ```
 
-```{r compress}
+```{r}
 df <- read.csv(file = './data/ipums.csv',na.strings=c("NA"))
 drop_columns = c('BPL', 'MBPL', 'FBPL', 'NATIVITY', 'CITIZEN', 'YRIMMIG', 
                  'YRINUSA', 'INCWAGE', 'MARST', 'OCC1950', 'IND1950', 'CITY')
@@ -24,7 +17,7 @@ data <- df %>%
 ```
 
 
-```{r }
+```{r}
 data%>%group_by(YEAR, SEX)%>%count(LABFORCE)%>%mutate('bar_height'=n/28000*400)
 ```
 
