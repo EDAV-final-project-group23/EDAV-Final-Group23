@@ -1,3 +1,333 @@
-# Interactive component
+---
+#output: html_document
+---
 
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+## Animated bar chart
+
+In this chapter, we plot an animated graph to show how labor force for each gender has changed over the years (from 1860 to 1940). Since the text cannot be used in transition in D3, we placed a vertical axis on the left of the bar chart with years. An orange ball keeps moving along the axis to indicate which year's statistics the graph is showing. To make the change in the bar chart more obvious, we alternatively change the filling color of the bars between blue and green every time the year changes.
+
+```{r 1}
+library(tidyverse)
+library(patchwork)
+```
+
+```{r compress}
+df <- read.csv(file = '~/Desktop/courses/5702/final project/ipums.csv',na.strings=c("NA"))
+drop_columns = c('BPL', 'MBPL', 'FBPL', 'NATIVITY', 'CITIZEN', 'YRIMMIG', 
+                 'YRINUSA', 'INCWAGE', 'MARST', 'OCC1950', 'IND1950', 'CITY')
+data <- df %>%
+  select(-one_of(drop_columns)) %>%
+  filter(AGE>=18 & AGE<=66)
+```
+
+
+```{r }
+data%>%group_by(YEAR, SEX)%>%count(LABFORCE)%>%mutate('bar_height'=n/28000*400)
+```
+
+Conclusions:
+
+* Most of the male are in the labor force, and the percentage remains relatively unchanged throughout the whole time.
+* Since 1860, the percentage of women in the labor force has been increaasing till the end of the time included (1940). 
+* However, by the time of 1940, more than half of the women still remained out of the labor force, yet the difference between women not in labor force and women in labor force has decreased significantly compared to 1860.
+
+
+<script src="https://d3js.org/d3.v7.js"></script>
+<script>
+// Create svg and initial bars
+
+      var w = 500;
+      var h = 350;
+      var margin = {
+        top: 25,
+        right: 0,
+        bottom: 75,
+        left: 100,
+      };
+      var innerWidth = w - margin.left - margin.right;
+      var innerHeight = h - margin.top - margin.bottom;
+
+      var bardata = [
+        { category: 'Female_No', value: 36.8 },
+        { category: 'Female_Yes', value: 10.7 },
+        { category: 'Male_No', value: 3.8 },
+        { category: 'Male_Yes', value: 40.1 },
+      ];
+
+      var xScale = d3
+        .scaleBand()
+        .domain(bardata.map((d) => d.category))
+        .range([0, innerWidth])
+        .paddingInner(0.1);
+
+      var yScale = d3
+        .scaleLinear()
+        .domain([0, d3.max(bardata.map((d) => d.value))])
+        .range([innerHeight, 0]);
+
+      var xAxis = d3.axisBottom().scale(xScale);
+
+
+      // add svg
+
+      var svg = d3
+        .select('body')
+        .append('svg')
+        .attr('width', w)
+        .attr('height', h);
+
+      // add background rectangle
+
+      svg
+        .append('rect')
+        .attr('x', 0)
+        .attr('y', 0)
+        .attr('width', w)
+        .attr('height', h)
+        .attr('fill', 'aliceblue');
+
+      // add bars as a group
+
+      var bars = svg
+        .append('g')
+        .attr('id', 'plot')
+        .attr(
+          'transform',
+          `translate (${margin.left}, ${margin.top})`
+        )
+        .selectAll('rect')
+        .data(bardata);
+
+      bars
+        .enter()
+        .append('rect')
+        .attr('x', (d) => xScale(d.category))
+        .attr('y', (d) => yScale(d.value))
+        .attr('width', xScale.bandwidth())
+        .attr(
+          'height',
+          (d) => innerHeight - yScale(d.value)
+        )
+        .attr('fill', 'cornflowerblue');
+
+      // add axes
+
+      svg
+        .append('g')
+        .attr('class', 'xAxis')
+        .attr(
+          'transform',
+          `translate (${margin.left}, ${h - margin.bottom})`
+        )
+        .call(xAxis);
+
+
+      
+      
+      
+      
+  var bardata_2 = [
+        { category: 'Female_No', value: 43.4 },
+        { category: 'Female_Yes', value: 13.7 },
+        { category: 'Male_No', value: 3.3 },
+        { category: 'Male_Yes', value: 47.7 },
+      ];
+	var bars = svg.select('g').selectAll("rect").data(bardata_2);
+    
+      
+var yScale = d3
+        .scaleLinear()
+        .domain([0, d3.max(bardata_2.map((d) => d.value))])
+        .range([innerHeight, 0]);
+      
+bars.transition()
+  .duration(2000)
+  .attr('y', (d) => yScale(d.value))
+  .attr('x', (d) => xScale(d.category))
+  .attr('height',
+          (d) => innerHeight - yScale(d.value)
+        ).attr('fill', 'forestgreen');  
+      
+      
+      
+      
+      
+      
+      var bardata_3 = [
+        { category: 'Female_No', value: 57 },
+        { category: 'Female_Yes', value: 21.9 },
+        { category: 'Male_No', value: 3.7 },
+        { category: 'Male_Yes', value: 70.5 },
+      ];
+	var bars = svg.select('g').selectAll("rect").data(bardata_3);
+    
+      
+var yScale = d3
+        .scaleLinear()
+        .domain([0, d3.max(bardata_3.map((d) => d.value))])
+        .range([innerHeight, 0]);
+      
+bars.transition().delay(2000)
+  .duration(2000)
+  .attr('y', (d) => yScale(d.value))
+  .attr('x', (d) => xScale(d.category))
+  .attr('height',
+          (d) => innerHeight - yScale(d.value)
+        ).attr('fill', 'cornflowerblue'); 
+      
+
+      
+      var bardata_4 = [
+        { category: 'Female_No', value: 108.4 },
+        { category: 'Female_Yes', value: 42.3 },
+        { category: 'Male_No', value: 9.2 },
+        { category: 'Male_Yes', value: 136.3 },
+      ];
+	var bars = svg.select('g').selectAll("rect").data(bardata_4);
+    
+      
+var yScale = d3
+        .scaleLinear()
+        .domain([0, d3.max(bardata_4.map((d) => d.value))])
+        .range([innerHeight, 0]);
+      
+bars.transition().delay(4000)
+  .duration(2000)
+  .attr('y', (d) => yScale(d.value))
+  .attr('x', (d) => xScale(d.category))
+  .attr('height',
+          (d) => innerHeight - yScale(d.value)
+        ).attr('fill', 'forestgreen'); 
+      
+  
+      var bardata_5 = [
+        { category: 'Female_No', value: 139.8 },
+        { category: 'Female_Yes', value: 68.9 },
+        { category: 'Male_No', value: 10 },
+        { category: 'Male_Yes', value: 199.2 },
+      ];
+	var bars = svg.select('g').selectAll("rect").data(bardata_5);
+    
+      
+var yScale = d3
+        .scaleLinear()
+        .domain([0, d3.max(bardata_5.map((d) => d.value))])
+        .range([innerHeight, 0]);
+      
+bars.transition().delay(6000)
+  .duration(2000)
+  .attr('y', (d) => yScale(d.value))
+  .attr('x', (d) => xScale(d.category))
+  .attr('height',
+          (d) => innerHeight - yScale(d.value)
+        ).attr('fill', 'cornflowerblue'); 
+      
+      
+      
+      var bardata_6 = [
+        { category: 'Female_No', value: 168.7 },
+        { category: 'Female_Yes', value: 87 },
+        { category: 'Male_No', value: 13.7 },
+        { category: 'Male_Yes', value: 239.2 },
+      ];
+	var bars = svg.select('g').selectAll("rect").data(bardata_6);
+    
+      
+var yScale = d3
+        .scaleLinear()
+        .domain([0, d3.max(bardata_6.map((d) => d.value))])
+        .range([innerHeight, 0]);
+      
+bars.transition().delay(8000)
+  .duration(2000)
+  .attr('y', (d) => yScale(d.value))
+  .attr('x', (d) => xScale(d.category))
+  .attr('height',
+          (d) => innerHeight - yScale(d.value)
+        ).attr('fill', 'forestgreen'); 
+      
+      
+      var bardata_7 = [
+        { category: 'Female_No', value: 221.4 },
+        { category: 'Female_Yes', value: 110.3 },
+        { category: 'Male_No', value: 22.8 },
+        { category: 'Male_Yes', value: 311.6 },
+      ];
+	var bars = svg.select('g').selectAll("rect").data(bardata_7);
+    
+      
+var yScale = d3
+        .scaleLinear()
+        .domain([0, d3.max(bardata_7.map((d) => d.value))])
+        .range([innerHeight, 0]);
+      
+bars.transition().delay(10000)
+  .duration(2000)
+  .attr('y', (d) => yScale(d.value))
+  .attr('x', (d) => xScale(d.category))
+  .attr('height',
+          (d) => innerHeight - yScale(d.value)
+        ).attr('fill', 'cornflowerblue'); 
+      
+      var bardata_8 = [
+        { category: 'Female_No', value: 265 },
+        { category: 'Female_Yes', value: 160.4 },
+        { category: 'Male_No', value: 35.4 },
+        { category: 'Male_Yes', value: 377.2 },
+      ];
+	var bars = svg.select('g').selectAll("rect").data(bardata_8);
+    
+      
+var yScale = d3
+        .scaleLinear()
+        .domain([0, d3.max(bardata_8.map((d) => d.value))])
+        .range([innerHeight, 0]);
+      
+bars.transition().delay(12000)
+  .duration(2000)
+  .attr('y', (d) => yScale(d.value))
+  .attr('x', (d) => xScale(d.category))
+  .attr('height',
+          (d) => innerHeight - yScale(d.value)
+        ).attr('fill', 'forestgreen'); 
+      
+    svg.append("circle").attr("cx", "67").attr("cy", "275").attr("r", "8")
+  .attr("fill", "orange");
+      my_circle = svg.select('circle')
+      my_circle.transition().delay(0)
+  .duration(2000).attr('cy',245)
+      my_circle.transition().delay(2000)
+  .duration(2000).attr('cy',213)
+      my_circle.transition().delay(4000)
+  .duration(2000).attr('cy',144)
+      my_circle.transition().delay(6000)
+  .duration(2000).attr('cy',110)
+      my_circle.transition().delay(8000)
+  .duration(2000).attr('cy',76)
+      my_circle.transition().delay(10000)
+  .duration(2000).attr('cy',43)
+      my_circle.transition().delay(12000)
+  .duration(2000).attr('cy',10)
+      
+      var width = 400, height = 400;
+
+    var data_axis = [1860, 1870, 1880, 1900, 1910, 1920, 1930, 1940];
+
+    var scale = d3.scaleLinear()
+                  .domain([d3.min(data_axis), d3.max(data_axis)])
+                  .range([270, 0]);
+
+    var y_axis = d3.axisLeft()
+                  .scale(scale);
+
+    svg.append("g")
+       .attr("transform", "translate(50, 10)")
+       .call(y_axis);
+      
+    svg.append('text').text('Labor Force by genders across the years').attr('x',130).attr('y',325)
+    
+</script>
 
