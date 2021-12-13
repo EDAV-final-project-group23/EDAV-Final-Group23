@@ -27,3 +27,10 @@ issues-with-data
 import-packages-and-dataset
 reduce-cardinality-and-decode-data
 handling-na-special-cases-and-enforce-data-type
+data-extraction-workflow
+issues-with-the-data
+handling-na-special-cases-and-enforce-data-types
+animated-bar-chart
+summary
+suggestion
+look-forward
