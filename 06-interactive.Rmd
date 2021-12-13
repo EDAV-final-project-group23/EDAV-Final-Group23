@@ -15,7 +15,7 @@ library(patchwork)
 ```
 
 ```{r compress}
-df <- read.csv(file = '~/Desktop/courses/5702/final project/ipums.csv',na.strings=c("NA"))
+df <- read.csv(file = './data/ipums.csv',na.strings=c("NA"))
 drop_columns = c('BPL', 'MBPL', 'FBPL', 'NATIVITY', 'CITIZEN', 'YRIMMIG', 
                  'YRINUSA', 'INCWAGE', 'MARST', 'OCC1950', 'IND1950', 'CITY')
 data <- df %>%

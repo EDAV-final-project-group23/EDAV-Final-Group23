@@ -24,7 +24,7 @@
 <meta name="author" content="Luwei Zhang, Guangyu Wu, Jingxiang Zhang" />
 
 
-<meta name="date" content="2021-12-12" />
+<meta name="date" content="2021-12-13" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -193,6 +193,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="animated-bar-chart" class="section level1" number="6">
 <h1><span class="header-section-number">Chapter 6</span> Animated bar chart</h1>
 <p>In this chapter, we plot an animated graph to show how labor force for each gender has changed over the years (from 1860 to 1940). Since the text cannot be used in transition in D3, we placed a vertical axis on the left of the bar chart with years. An orange ball keeps moving along the axis to indicate which year’s statistics the graph is showing. To make the change in the bar chart more obvious, we alternatively change the filling color of the bars between blue and green every time the year changes.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="animated-bar-chart.html#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb8-2"><a href="animated-bar-chart.html#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(patchwork)</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="animated-bar-chart.html#cb9-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="at">file =</span> <span class="st">&#39;./data/ipums.csv&#39;</span>,<span class="at">na.strings=</span><span class="fu">c</span>(<span class="st">&quot;NA&quot;</span>))</span>
+<span id="cb9-2"><a href="animated-bar-chart.html#cb9-2" aria-hidden="true" tabindex="-1"></a>drop_columns <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&#39;BPL&#39;</span>, <span class="st">&#39;MBPL&#39;</span>, <span class="st">&#39;FBPL&#39;</span>, <span class="st">&#39;NATIVITY&#39;</span>, <span class="st">&#39;CITIZEN&#39;</span>, <span class="st">&#39;YRIMMIG&#39;</span>, </span>
+<span id="cb9-3"><a href="animated-bar-chart.html#cb9-3" aria-hidden="true" tabindex="-1"></a>                 <span class="st">&#39;YRINUSA&#39;</span>, <span class="st">&#39;INCWAGE&#39;</span>, <span class="st">&#39;MARST&#39;</span>, <span class="st">&#39;OCC1950&#39;</span>, <span class="st">&#39;IND1950&#39;</span>, <span class="st">&#39;CITY&#39;</span>)</span>
+<span id="cb9-4"><a href="animated-bar-chart.html#cb9-4" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb9-5"><a href="animated-bar-chart.html#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span><span class="fu">one_of</span>(drop_columns)) <span class="sc">%&gt;%</span></span>
+<span id="cb9-6"><a href="animated-bar-chart.html#cb9-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(AGE<span class="sc">&gt;=</span><span class="dv">18</span> <span class="sc">&amp;</span> AGE<span class="sc">&lt;=</span><span class="dv">66</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="animated-bar-chart.html#cb10-1" aria-hidden="true" tabindex="-1"></a>data<span class="sc">%&gt;%</span><span class="fu">group_by</span>(YEAR, SEX)<span class="sc">%&gt;%</span><span class="fu">count</span>(LABFORCE)<span class="sc">%&gt;%</span><span class="fu">mutate</span>(<span class="st">&#39;bar_height&#39;</span><span class="ot">=</span>n<span class="sc">/</span><span class="dv">28000</span><span class="sc">*</span><span class="dv">400</span>)</span></code></pre></div>
 <pre><code>## # A tibble: 35 × 5
 ## # Groups:   YEAR, SEX [18]
 ##     YEAR SEX    LABFORCE                       n bar_height
@@ -218,13 +227,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <script>
 // Create svg and initial bars
 
-      var w = 500;
+      var w = 1000;
       var h = 350;
       var margin = {
         top: 25,
-        right: 0,
+        right: 100,
         bottom: 75,
-        left: 100,
+        left: 600,
       };
       var innerWidth = w - margin.left - margin.right;
       var innerHeight = h - margin.top - margin.bottom;
@@ -262,7 +271,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
       svg
         .append('rect')
-        .attr('x', 0)
+        .attr('x', 500)
         .attr('y', 0)
         .attr('width', w)
         .attr('height', h)
@@ -473,7 +482,7 @@ bars.transition().delay(12000)
           (d) => innerHeight - yScale(d.value)
         ).attr('fill', 'forestgreen'); 
       
-    svg.append("circle").attr("cx", "67").attr("cy", "275").attr("r", "8")
+    svg.append("circle").attr("cx", "567").attr("cy", "275").attr("r", "8")
   .attr("fill", "orange");
       my_circle = svg.select('circle')
       my_circle.transition().delay(0)
@@ -503,11 +512,10 @@ bars.transition().delay(12000)
                   .scale(scale);
 
     svg.append("g")
-       .attr("transform", "translate(50, 10)")
+       .attr("transform", "translate(550, 10)")
        .call(y_axis);
       
-    svg.append('text').text('Labor Force by genders across the years').attr('x',130).attr('y',325)
-    
+    svg.append('text').text('Labor Force by genders across the years').attr('x',630).attr('y',325)
 </script>
 
 </div>
