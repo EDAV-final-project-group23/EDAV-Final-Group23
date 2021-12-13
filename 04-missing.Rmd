@@ -4,7 +4,7 @@ As the one of world's largest collections of open-access census microdata, IPUMS
 
 To reduce the visual clutter in the plot of missing patterns, we rename variable names into 3 letter abbreviations and remove the variables that are not related to working conditions such as person unique identifier. In total, there are 306 missing patterns, but tails are almost negligible in terms of their percentage. Thus, we focus on top 30 patterns which made up the majority of the data. To do this, we augment the `plot_missing` function to add a parameter to control how many patterns to display in graph. The results are shown below.
 
-```{r setup, include=FALSE}
+```{r include=FALSE}
 knitr::opts_chunk$set(warning = FALSE, message = FALSE, echo = TRUE)
 knitr::write_bib("knitr", file = "packages.bib")
 

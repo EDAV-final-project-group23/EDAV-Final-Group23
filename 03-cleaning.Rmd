@@ -2,6 +2,10 @@
 
 ## Import Packages and Dataset
 
+```{r include=FALSE}
+knitr::write_bib("knitr", file = "packages.bib")
+```
+
 IPUMSR is a powerful package developed to "import census, survey and geographic data provided by 'IPUMS' into R plus tools to help use the associated metadata to make analysis easier" ^[Ellis, Burk, Grover, Minnesota Population Center (2017). ipumsr: Read 'IPUMS' Extract Files. R package version 0.4.5. https://cran.r-project.org/web/packages/ipumsr/index.html]. 
 
 Here, we use the function `read_ipums_ddi` to read in the data codebook, which is downloaded along with the extract and stored in XML format. In an R development environment such as RStudio, you can use the command `ipums_view(ddi)` to open an interactive codebook through the built-in viewer. 
