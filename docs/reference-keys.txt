@@ -17,3 +17,13 @@ time-series-and-employment
 conclusion
 interactive-component
 conclusion-1
+fig:unnamed-chunk-3
+fig:unnamed-chunk-4
+introduction-of-data-source
+data-generation-process
+extraction-process
+choice-of-variables
+issues-with-data
+import-packages-and-dataset
+reduce-cardinality-and-decode-data
+handling-na-special-cases-and-enforce-data-type
