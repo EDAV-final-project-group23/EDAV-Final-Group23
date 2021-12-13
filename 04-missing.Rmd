@@ -1,4 +1,4 @@
-# Missing values
+# Missing Values
 
 As the one of world's largest collections of open-access census microdata, IPUMS has been meticulously cleaned and analyzed for completeness and missing patterns. According to its documentation, "missing, illegible and inconsistent values" in variables are edited or allocated, and tagged with data quality flags to indicate the kind of edits applied^[Introduction to Data Editing and Allocation. "IPUMS USA." IPUMS.org. Accessed 2021 Nov 18.  https://usa.ipums.org/usa/flags.shtml]. When understanding the missing values in the outcome data, which we will use for this project, we need bear in mind that the above-mentioned sources of missing values are cleaned and interpolated by the IPUMS team to the best they can.
 

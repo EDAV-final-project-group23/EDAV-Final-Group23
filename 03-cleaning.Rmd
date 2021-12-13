@@ -1,6 +1,6 @@
-# Data transformation
+# Data Transformation
 
-## Import packages and dataset
+## Import Packages and Dataset
 
 IPUMSR is a powerful package developed to "import census, survey and geographic data provided by 'IPUMS' into R plus tools to help use the associated metadata to make analysis easier" ^[Ellis, Burk, Grover, Minnesota Population Center (2017). ipumsr: Read 'IPUMS' Extract Files. R package version 0.4.5. https://cran.r-project.org/web/packages/ipumsr/index.html]. 
 
@@ -19,7 +19,7 @@ ddi <- read_ipums_ddi("./data/usa_00038.xml")
 data <- read_ipums_micro(ddi)
 ```
 
-## Reduce cardinality and decode data
+## Reduce Cardinality and Decode Data
 
 As discussed in the previous chapter, one issue with the data is that some variables have a high cardinality with roughly even proportion. For these categories, we cannot lump the minority values into the Other category. For this project, we collect the multi-layer categorization from the IPUMS documentation to cluster the occupation and industry into larger categories ^[https://usa.ipums.org/usa-action/variables/OCC1950#codes_section]. We also make a decision to use `lbl_na_if` function from IPUMSR to mark non-occupational responses such as "keeping house" as missing values. 
 
@@ -44,7 +44,7 @@ df <- as_factor(data)
 
 ```
 
-## Handling N/A, special cases and enforce data type
+## Handling N/A, Special Cases and Enforce Data Types
 
 The other data issue (tail values) is addressed through a series of column-specific data transformations. More specifically, we handle different codes for N/A, collapse tail values into larger categories, and ensure that all values are in the correct data type for that column. When the meaning is clear, we also trim the value to make it concise. The resulting dataset is saved as a CSV file for downstream analysis. 
 
