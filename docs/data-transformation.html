@@ -194,7 +194,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h1><span class="header-section-number">Chapter 3</span> Data Transformation</h1>
 <div id="import-packages-and-dataset" class="section level2" number="3.1">
 <h2><span class="header-section-number">3.1</span> Import Packages and Dataset</h2>
-<p>IPUMSR is a powerful package developed to “import census, survey and geographic data provided by ‘IPUMS’ into R plus tools to help use the associated metadata to make analysis easier” <a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a>.</p>
+<p>IPUMSR is a powerful package developed to “import census, survey and geographic data provided by ‘IPUMS’ into R plus tools to help use the associated metadata to make analysis easier” <a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a>.</p>
 <p>Here, we use the function <code>read_ipums_ddi</code> to read in the data codebook, which is downloaded along with the extract and stored in XML format. In an R development environment such as RStudio, you can use the command <code>ipums_view(ddi)</code> to open an interactive codebook through the built-in viewer.</p>
 <p>Then, we can use <code>read_ipums_micro(ddi)</code> to load the actual dataset into the environment, given data file is placed next the XML codebook.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="data-transformation.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ipumsr) </span>
@@ -208,7 +208,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="reduce-cardinality-and-decode-data" class="section level2" number="3.2">
 <h2><span class="header-section-number">3.2</span> Reduce Cardinality and Decode Data</h2>
-<p>As discussed in the previous chapter, one issue with the data is that some variables have a high cardinality with roughly even proportion. For these categories, we cannot lump the minority values into the Other category. For this project, we collect the multi-layer categorization from the IPUMS documentation to cluster the occupation and industry into larger categories <a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a>. We also make a decision to use <code>lbl_na_if</code> function from IPUMSR to mark non-occupational responses such as “keeping house” as missing values.</p>
+<p>As discussed in the previous chapter, one issue with the data is that some variables have a high cardinality with roughly even proportion. For these categories, we cannot lump the minority values into the Other category. For this project, we collect the multi-layer categorization from the IPUMS documentation to cluster the occupation and industry into larger categories <a href="#fn6" class="footnote-ref" id="fnref6"><sup>6</sup></a>. We also make a decision to use <code>lbl_na_if</code> function from IPUMSR to mark non-occupational responses such as “keeping house” as missing values.</p>
 </div>
 <div id="handling-na-special-cases-and-enforce-data-types" class="section level2" number="3.3">
 <h2><span class="header-section-number">3.3</span> Handling N/A, Special Cases and Enforce Data Types</h2>
@@ -218,9 +218,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div class="footnotes">
 <hr />
-<ol start="4">
-<li id="fn4"><p>Ellis, Burk, Grover, Minnesota Population Center (2017). ipumsr: Read ‘IPUMS’ Extract Files. R package version 0.4.5. <a href="https://cran.r-project.org/web/packages/ipumsr/index.html" class="uri">https://cran.r-project.org/web/packages/ipumsr/index.html</a><a href="data-transformation.html#fnref4" class="footnote-back">↩︎</a></p></li>
-<li id="fn5"><p><a href="https://usa.ipums.org/usa-action/variables/OCC1950#codes_section" class="uri">https://usa.ipums.org/usa-action/variables/OCC1950#codes_section</a><a href="data-transformation.html#fnref5" class="footnote-back">↩︎</a></p></li>
+<ol start="5">
+<li id="fn5"><p>Ellis, Burk, Grover, Minnesota Population Center (2017). ipumsr: Read ‘IPUMS’ Extract Files. R package version 0.4.5. <a href="https://cran.r-project.org/web/packages/ipumsr/index.html" class="uri">https://cran.r-project.org/web/packages/ipumsr/index.html</a><a href="data-transformation.html#fnref5" class="footnote-back">↩︎</a></p></li>
+<li id="fn6"><p><a href="https://usa.ipums.org/usa-action/variables/OCC1950#codes_section" class="uri">https://usa.ipums.org/usa-action/variables/OCC1950#codes_section</a><a href="data-transformation.html#fnref6" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>
