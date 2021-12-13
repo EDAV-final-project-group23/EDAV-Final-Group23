@@ -13,7 +13,7 @@ library(patchwork)
 source("plot_missing_top.R")
 ```
 
-```{r fig.height = 9, fig.width = 9}
+```{r echo=FALSE, fig.height = 9, fig.width = 9}
 
 # Load data
 df <- read.csv(file = './data/ipums.csv',na.strings=c("NA"))
@@ -39,12 +39,13 @@ The next groups of variables with relatively high level of missing values are al
 
 ```{r fig.height = 9, fig.width = 9}
 
-# Plot missing patterns by sex
+# Divide up data by sex
 df_male <- df %>% filter(SEX == 'Male')
 df_female <- df %>% filter(SEX == 'Female')
 
-# Plot top 30 missing patterns 
+# Plot missing patterns for male
 plot_missing_top(df_male, percent = TRUE, top_patterns = 30)
+# Plot missing patterns for female
 plot_missing_top(df_female, percent = TRUE, top_patterns = 30)
 ```
 
