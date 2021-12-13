@@ -1,35 +1,60 @@
-# Data transformation
+# Data Transformation
 
-## Decoding, Handling n/a, missing, and other category codes, Enforce data type, Reduce cardinality
+## Import Packages and Dataset
 
-```{r}
+IPUMSR is a powerful package developed to "import census, survey and geographic data provided by 'IPUMS' into R plus tools to help use the associated metadata to make analysis easier" ^[Ellis, Burk, Grover, Minnesota Population Center (2017). ipumsr: Read 'IPUMS' Extract Files. R package version 0.4.5. https://cran.r-project.org/web/packages/ipumsr/index.html]. 
+
+Here, we use the function `read_ipums_ddi` to read in the data codebook, which is downloaded along with the extract and stored in XML format. In an R development environment such as RStudio, you can use the command `ipums_view(ddi)` to open an interactive codebook through the built-in viewer. 
+
+Then, we can use `read_ipums_micro(ddi)` to load the actual dataset into the environment, given data file is placed next the XML codebook. 
+
+```{r echo=TRUE}
 library(ipumsr) 
 library(tidyverse) 
 library(sf)
+
+# Read in codebook
+ddi <- read_ipums_ddi("./data/usa_00038.xml")
+# Load in data
+data <- read_ipums_micro(ddi)
 ```
 
-```{r}
+## Reduce Cardinality and Decode Data
 
-ddi <- read_ipums_ddi("./data/usa_00038.xml")
-data <- read_ipums_micro(ddi)
+As discussed in the previous chapter, one issue with the data is that some variables have a high cardinality with roughly even proportion. For these categories, we cannot lump the minority values into the Other category. For this project, we collect the multi-layer categorization from the IPUMS documentation to cluster the occupation and industry into larger categories ^[https://usa.ipums.org/usa-action/variables/OCC1950#codes_section]. We also make a decision to use `lbl_na_if` function from IPUMSR to mark non-occupational responses such as "keeping house" as missing values. 
+
+```{r echo=TRUE}
+
+# Remove varialbes with lower usability, as explained in previous chapter
 data <- data %>% select(-c(SERIAL, PERNUM, RELATED, RACED, BPLD, MBPLD, FBPLD, YRSUSA2, MTONGUE, MTONGUED, PRESGL))
 
-# OCC1950CAT, IND1950CAT (augmentation)
+# Data augmentation for categories of occupations and industries
 occ_cat <- read_csv("./data/occupation_categories.csv")
 ind_cat <- read_csv("./data/industry_categories.csv")
 data <- left_join(data, occ_cat, by ='OCC1950')
 data <- left_join(data, ind_cat, by ='IND1950')
 
-# NA relabeling
+# NA relabeling based on code range
 data$OCC1950 <- lbl_na_if(data$OCC1950, ~.val > 970) %>% as_factor()
 data$IND1950 <- lbl_na_if(data$IND1950, ~.val >= 975 | .val == 0) %>% as_factor()
 data$OCCSCORE <- as.numeric(data$OCCSCORE)
 
+# Factorize columns
 df <- as_factor(data)
+
+```
+
+## Handling N/A, Special Cases and Enforce Data Types
+
+The other data issue (tail values) is addressed through a series of column-specific data transformations. More specifically, we handle different codes for N/A, collapse tail values into larger categories, and ensure that all values are in the correct data type for that column. When the meaning is clear, we also trim the value to make it concise. The resulting dataset is saved as a CSV file for downstream analysis. 
+
+```{r echo=TRUE}
+
+# Customized cleaning for each column
+
 # YEAR
 df$YEAR <- as.numeric(as.character(df$YEAR))
-# CITY 
-## table(df$CITY)
+# CITY
 # FAMSIZE
 df$FAMSIZE <- as.character(df$FAMSIZE)
 df$FAMSIZE[df$FAMSIZE == "1 family member present"] = "1"
@@ -48,7 +73,6 @@ df$RELATE[df$RELATE == "Other non-relatives"] = "Other"
 df$RELATE[df$RELATE == "Institutional inmates"] = "Inmate"
 df$RELATE <- as.factor(df$RELATE)
 # SEX
-## table(df$SEX)
 # AGE
 df$AGE <- as.character(df$AGE)
 df$AGE[df$AGE == "Less than 1 year old"] = "0"
@@ -86,6 +110,11 @@ df$YRIMMIG <- as.character(df$YRIMMIG)
 df$YRIMMIG = str_replace(df$YRIMMIG, " \\s*\\([^\\)]+\\)", "")
 df$YRIMMIG[df$YRIMMIG %in% c('N/A', 'Not reported')] = NA
 df$YRIMMIG <- as.numeric(df$YRIMMIG)
+# Creating Years spent in US variable
+df <- df %>%
+ mutate(
+  YRINUSA = YEAR - YRIMMIG
+ )
 # SCHOOL
 df$SCHOOL <- as.character(df$SCHOOL)
 df$SCHOOL[df$SCHOOL %in% c("N/A", "Unknown", "Missing")] = NA
@@ -113,13 +142,7 @@ df$EDSCOR50 <- as.character(df$EDSCOR50)
 df$EDSCOR50[df$EDSCOR50 %in% c('N/A')] = NA
 df$EDSCOR50 <- as.numeric(df$EDSCOR50)
 
-# YRINUSA (augmentation)
-df <- df %>%
- mutate(
-  YRINUSA = YEAR - YRIMMIG
- )
-
+# Output data
 write.csv(df, file = './data/ipums.csv', row.names = FALSE)
-
 ```
 
